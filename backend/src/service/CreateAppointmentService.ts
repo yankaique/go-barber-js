@@ -1,30 +1,34 @@
+import { startOfHour } from 'date-fns';
 import Appointment from '../models/Appointment';
-import { startOfHour } from 'date-fns'
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
-interface RequestDTO{
+interface RequestDTO {
     provider: string;
-    date:Date;
+    date: Date;
 }
 
-class CreateAppointmentService{
-
+class CreateAppointmentService {
     private appointmentsRepository: AppointmentsRepository;
 
-    constructor(appointmentsRepository: AppointmentsRepository){
-        this.appointmentsRepository = appointmentsRepository
+    constructor(appointmentsRepository: AppointmentsRepository) {
+        this.appointmentsRepository = appointmentsRepository;
     }
 
-    public execute({provider, date}: RequestDTO):Appointment{
+    public execute({ provider, date }: RequestDTO): Appointment {
         const appointmentDate = startOfHour(date);
 
-        const findAppointmentInSameDate = this.appointmentsRepository.findByDate(date);
+        const findAppointmentInSameDate = this.appointmentsRepository.findByDate(
+            date,
+        );
 
-        if(findAppointmentInSameDate){
+        if (findAppointmentInSameDate) {
             throw Error('This appointment is already booked');
         }
 
-        const appointment = this.appointmentsRepository.create({ provider, date: appointmentDate });
+        const appointment = this.appointmentsRepository.create({
+            provider,
+            date: appointmentDate,
+        });
 
         return appointment;
     }
