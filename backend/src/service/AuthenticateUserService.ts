@@ -37,7 +37,6 @@ class AuthenticateUserService {
         const token = sign({}, secret, {
             subject: user.id,
             expiresIn,
-
         });
 
         return { user, token };
