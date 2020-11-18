@@ -10,7 +10,7 @@ import Input from '../../components/input';
 import Button from '../../components/button';
 
 const Signup: React.FC = () => {
-  const handleSubmit = useCallback(async (data: Object): void => {
+  const handleSubmit = useCallback(async (data: Object): Promise<void> => {
     try {
       const schema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatório'),
