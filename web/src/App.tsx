@@ -4,7 +4,8 @@ import GlobalStle from './styles/global';
 import Signin from './pages/Signin';
 // import Signup from './pages/Signup';
 
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './hooks/AuthContext';
+import ToastContainer from './components/toastContainer/index';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <AuthProvider>
         <Signin />
       </AuthProvider>
+      <ToastContainer />
       <GlobalStle />
     </>
   );
