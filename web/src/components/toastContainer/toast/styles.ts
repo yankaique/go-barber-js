@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 
 const containerTypeVariation = {
   info: css`
@@ -20,7 +21,7 @@ interface ContainertProps {
   hasDescription: Boolean;
 }
 
-export const Container = styled.div<ContainertProps>`
+export const Container = styled(animated.div)<ContainertProps>`
   width: 360px;
   position: relative;
   padding: 16px 30px 16px 16px;
