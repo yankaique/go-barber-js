@@ -4,14 +4,14 @@ import GlobalStle from './styles/global';
 import Signin from './pages/Signin';
 // import Signup from './pages/Signup';
 
-import AuthContext from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 
 const App: React.FC = () => {
   return (
     <>
-      <AuthContext.Provider value={{ name: 'Yan' }}>
+      <AuthProvider>
         <Signin />
-      </AuthContext.Provider>
+      </AuthProvider>
       <GlobalStle />
     </>
   );
