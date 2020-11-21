@@ -1,12 +1,16 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {View, Text, StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {View, StatusBar} from 'react-native';
+
+import Routes from './src/routes';
 
 const App: React.FC = () =>{
     return(
-        <>
-        <StatusBar barStyle="light-content"/>
-        <View style={{flex:1,backgroundColor:'#312e38'}} />
-        </>
+        <NavigationContainer>
+            <StatusBar barStyle="light-content"/>
+            <Routes />
+        </NavigationContainer>
     )
 }
 
