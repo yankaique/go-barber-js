@@ -18,6 +18,7 @@ const SignUp: React.FC = () =>{
     const formRef = useRef<FormHandles>(null);
     const emailInputRef = useRef<TextInput>(null);
     const passwordInputRef = useRef<TextInput>(null);
+    const navigation = useNavigation();
 
     interface SignUpFormData {
         name: string;
@@ -58,10 +59,9 @@ const SignUp: React.FC = () =>{
             Alert.alert('Erro no cadastro','Ocorreu um erro ao fazer o cadastro, tente novamente.')
           }
         },
-        [],
+        [navigation],
       );
 
-    const navigation = useNavigation();
     return(
         <>
             <KeyboardAvoidingView
