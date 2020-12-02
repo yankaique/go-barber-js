@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import CreateUserService from '../service/CreateUserService';
+import CreateUserService from '../../service/CreateUserService';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import UpdateUserAvatarService from '../service/UpdateUserAvatarService';
 
-import uploadConfig from '../config/upload';
+import uploadConfig from '../../config/upload';
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
@@ -44,6 +44,7 @@ usersRouter.patch(
         delete user.password;
 
         return response.json(user);
-});
+    },
+);
 
 export default usersRouter;
