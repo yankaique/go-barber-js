@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import path from 'path';
 import fs from 'fs';
+import { injectable, inject } from 'tsyringe';
+
 import User from '@modules/users/infra/typeorm/entities/User';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
@@ -12,9 +14,12 @@ interface IRequest {
     avatarFilename: string;
 }
 
+
+@injectable()
 class UpdateUserAvatarService {
 
     constructor(
+        @inject('UsersRepository')
         private usersRepository: IUsersRepository
     ){
 

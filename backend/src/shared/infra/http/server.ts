@@ -8,6 +8,7 @@ import AppError from '@shared/errors/AppError';
 import routes from '@shared/infra/http/routes/index';
 
 import '@shared/infra/typeorm';
+import '@shared/container'
 
 const app = express();
 

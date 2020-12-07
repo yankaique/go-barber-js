@@ -1,6 +1,6 @@
-import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import { injectable, inject } from 'tsyringe';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
@@ -18,9 +18,11 @@ interface IResponse {
     token: string;
 }
 
+@injectable()
 class AuthenticateUserService {
 
     constructor(
+        @inject('UsersRepository')
         private usersRepository: IUsersRepository
     ){
 
