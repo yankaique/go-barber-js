@@ -23,6 +23,7 @@
   "homepage": "https://github.com/yankaique/go-barber-js#readme",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.9",
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.16",
     "@types/jsonwebtoken": "^8.5.0",
