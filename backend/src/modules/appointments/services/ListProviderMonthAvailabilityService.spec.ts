@@ -14,20 +14,13 @@ describe('ListProvidersMonthAvailability',()=>{
     })
 
     it('should be able to list the month availability from provider',async ()=>{
-        await fakeAppointmentsRepository.create({
-            date: new Date(2020, 3, 20, 8, 0, 0),
-            provider_id: 'user'
-        });
 
-        await fakeAppointmentsRepository.create({
-            date: new Date(2020, 4, 20, 8, 0, 0),
-            provider_id: 'user'
-        });
-
-        await fakeAppointmentsRepository.create({
-            date: new Date(2020, 4, 20, 10, 0, 0),
-            provider_id: 'user'
-        });
+        for(let i=8; i <= 17; i++){
+            await fakeAppointmentsRepository.create({
+                date: new Date(2020, 4, 20, i, 0, 0),
+                provider_id: 'user'
+            });
+        }
 
         await fakeAppointmentsRepository.create({
             date: new Date(2020, 4, 21, 8, 0, 0),
@@ -43,7 +36,7 @@ describe('ListProvidersMonthAvailability',()=>{
         expect(availability).toEqual(expect.arrayContaining([
             {day: 19, available: true},
             {day: 20, available: false},
-            {day: 21, available: false},
+            {day: 21, available: true},
             {day: 22, available: true},
         ]))
     });
