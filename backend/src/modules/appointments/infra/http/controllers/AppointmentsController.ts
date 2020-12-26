@@ -7,6 +7,7 @@ import CreateAppointmentService from '@modules/appointments/services/CreateAppoi
 export default class AppointmentsController{
     public async create(request: Request, response: Response): Promise<Response> {
         // eslint-disable-next-line camelcase
+        const user_id = request.user.id;
         const { provider_id, date } = request.body;
 
         const parsedDate = parseISO(date);
@@ -16,6 +17,7 @@ export default class AppointmentsController{
         const appointment = await createAppointment.execute({
             provider_id,
             date: parsedDate,
+            user_id
         });
 
         return response.json(appointment);
