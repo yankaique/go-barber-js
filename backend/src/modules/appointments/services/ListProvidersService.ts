@@ -22,7 +22,7 @@ class ListProvidersService {
         const users = await this.usersRepository.findAllProvider({
             except_user_id: user_id
         });
-
+        // @ts-expect-error
         users.map(user => delete user.password )
 
         return users;
