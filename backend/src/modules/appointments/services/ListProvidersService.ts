@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { injectable, inject } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUserRepository from '@modules/users/repositories/IUsersRepository';
@@ -22,10 +23,8 @@ class ListProvidersService {
         const users = await this.usersRepository.findAllProvider({
             except_user_id: user_id
         });
-        // @ts-expect-error
-        users.map(user => delete user.password )
 
-        return users;
+        return classToClass(users);
     }
 }
 
