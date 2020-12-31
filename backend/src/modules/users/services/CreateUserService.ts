@@ -3,6 +3,7 @@ import { injectable, inject } from 'tsyringe';
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IHashProvider from '@modules/users/providers/hashProvider/models/IHashProvider';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import AppError from '@shared/errors/AppError';
 
 interface IRequest {
@@ -18,7 +19,10 @@ class CreateUserService {
         private usersRepository: IUsersRepository,
 
         @inject('HashProvider')
-        private hashProvider: IHashProvider
+        private hashProvider: IHashProvider,
+
+        @inject('CacheProvider')
+        private cacheProvider: ICacheProvider,
     ){
 
     }
@@ -39,6 +43,8 @@ class CreateUserService {
             email,
             password: hashedPassword,
         });
+
+        await this.cacheProvider.invalidatePrefix('providers-list');
 
         return user;
     }
