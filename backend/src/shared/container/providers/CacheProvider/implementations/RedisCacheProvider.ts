@@ -22,12 +22,12 @@ export default class RedisCacheProvider implements ICacheProvider {
         }
 
         const parsedData =  JSON.parse(data) as T;
-        console.log(parsedData)
+
         return parsedData;
     }
 
     public async invalidate(key: string): Promise<void>{
-
+        await this.client.del(key);
     }
 
     public async invalidatePrefix(prefix: string): Promise<void>{
