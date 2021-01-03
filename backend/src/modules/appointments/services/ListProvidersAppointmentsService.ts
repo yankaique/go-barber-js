@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { injectable, inject } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 import Appointment from '../infra/typeorm/entities/Appointment';
 // import { getDaysInMonth, getDate } from 'date-fns';
 
@@ -39,7 +40,7 @@ class ListProvidersAppointmentsService {
 
             await this.cacheProvider.save(
                 cacheKey,
-                appointments
+                classToClass(appointments)
             );
         }
 
