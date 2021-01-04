@@ -18,7 +18,7 @@ const containerTypeVariation = {
 
 interface ContainertProps {
   type?: 'success' | 'error' | 'info';
-  hasDescription: Boolean;
+  hasDescription: number;
 }
 
 export const Container = styled(animated.div)<ContainertProps>`
