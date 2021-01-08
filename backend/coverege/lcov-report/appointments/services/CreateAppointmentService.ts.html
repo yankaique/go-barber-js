@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/63</span>
+                <span class='fraction'>0/83</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/63</span>
+                <span class='fraction'>0/83</span>
             </div>
         
             
@@ -120,7 +120,47 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -184,12 +224,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >/* eslint-disable camelcase */</span></span></span>
-<span class="cstat-no" title="statement not covered" >import { startOfHour, isBefore, getHours } from 'date-fns';</span>
+<span class="cstat-no" title="statement not covered" >import { startOfHour, isBefore, getHours, format } from 'date-fns';</span>
 <span class="cstat-no" title="statement not covered" >import { injectable, inject } from 'tsyringe';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >import AppError from '@shared/errors/AppError';</span>
 <span class="cstat-no" title="statement not covered" >import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';</span>
+<span class="cstat-no" title="statement not covered" >import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';</span>
+<span class="cstat-no" title="statement not covered" >import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequestDTO {</span>
 <span class="cstat-no" title="statement not covered" >    provider_id: string;</span>
@@ -202,7 +245,13 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    constructor(</span>
 <span class="cstat-no" title="statement not covered" >        @inject('AppointmentsRepository')</span>
-<span class="cstat-no" title="statement not covered" >        private appointmentsRepository: IAppointmentsRepository</span>
+<span class="cstat-no" title="statement not covered" >        private appointmentsRepository: IAppointmentsRepository,</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        @inject('NotificationsRepository')</span>
+<span class="cstat-no" title="statement not covered" >        private notificationsRepository: INotificationsRepository,</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        @inject('CacheProvider')</span>
+<span class="cstat-no" title="statement not covered" >        private cacheProvider : ICacheProvider</span>
 <span class="cstat-no" title="statement not covered" >    ){</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -212,7 +261,6 @@
 <span class="cstat-no" title="statement not covered" >        date,</span>
 <span class="cstat-no" title="statement not covered" >        user_id</span>
 <span class="cstat-no" title="statement not covered" >    }: IRequestDTO): Promise&lt;Appointment&gt; {</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        const appointmentDate = startOfHour(date);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        if(isBefore(appointmentDate, Date.now())){</span>
@@ -228,7 +276,8 @@
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(</span>
-<span class="cstat-no" title="statement not covered" >            date,</span>
+<span class="cstat-no" title="statement not covered" >            appointmentDate,</span>
+<span class="cstat-no" title="statement not covered" >            provider_id</span>
 <span class="cstat-no" title="statement not covered" >        );</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        if (findAppointmentInSameDate) {</span>
@@ -240,6 +289,17 @@
 <span class="cstat-no" title="statement not covered" >            date: appointmentDate,</span>
 <span class="cstat-no" title="statement not covered" >            user_id</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'ás' HH:mm'h'");</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        await this.notificationsRepository.create({</span>
+<span class="cstat-no" title="statement not covered" >            recipient_id: provider_id,</span>
+<span class="cstat-no" title="statement not covered" >            content: `Novo agendamento para dia ${dateFormatted}`</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        await this.cacheProvider.invalidate(</span>
+<span class="cstat-no" title="statement not covered" >            `provider-appointments:${provider_id}:${format(appointmentDate, 'yyyy-M-d')}`</span>
+<span class="cstat-no" title="statement not covered" >        );</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        return appointment;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -253,7 +313,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Dec 27 2020 15:04:11 GMT-0300 (GMT-03:00)
+                at Thu Jan 07 2021 08:28:27 GMT-0300 (GMT-03:00)
             </div>
         </div>
         <script src="../../prettify.js"></script>
