@@ -32,10 +32,12 @@ class ListProvidersService {
                 except_user_id: user_id
             });
 
-            await this.cacheProvider.save(`providers-list:${user_id}`, users);
+            await this.cacheProvider.save(
+                `providers-list:${user_id}`,
+                classToClass(users));
         }
 
-        return classToClass(users);
+        return users;
     }
 }
 
