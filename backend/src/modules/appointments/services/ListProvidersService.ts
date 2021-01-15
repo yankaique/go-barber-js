@@ -26,7 +26,6 @@ class ListProvidersService {
     public async execute({ user_id }: IRequest): Promise<User[]> {
         let users = await this.cacheProvider.recover<User[]>(`providers-list:${user_id}`);
 
-
         if(!users){
             users = await this.usersRepository.findAllProvider({
                 except_user_id: user_id
