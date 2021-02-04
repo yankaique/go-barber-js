@@ -11,6 +11,7 @@ import { useAuth } from '../../hooks/auth';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import Icon from 'react-native-vector-icons/Feather';
+import ImagePicker from 'react-native-image-picker';
 
 import { Container, BackButton, Title, UserAvatarButton, UserAvatar } from './styles';
 
@@ -100,6 +101,30 @@ const SignUp: React.FC = () =>{
         },
         [navigation],
       );
+
+    const handleUpdateAvatar = useCallback(()=>{
+        ImagePicker.showImagePicker({
+            title: 'Selecione um avatar',
+            cancelButtonTitle: 'Cancelar',
+            takePhotoButtonTitle: 'Usar câmera',
+            chooseFromLibraryButtonTitle: 'Escolhe da galeria'
+        }, response => {
+            if(response.didCancel){
+                return;
+            }
+            if (response.error){
+                console.log('Erro ao atualizar seu avatar.');
+                return;
+            }
+
+            const source = { uri: response.uri };
+
+            this.setState({
+                avatarSource: source
+            })
+
+        });
+    },[]);
 
     const handleGoBack = useCallback(()=>{
         navigation.goBack();
