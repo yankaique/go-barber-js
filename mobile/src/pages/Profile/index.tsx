@@ -108,7 +108,7 @@ const SignUp: React.FC = () =>{
             cancelButtonTitle: 'Cancelar',
             takePhotoButtonTitle: 'Usar câmera',
             chooseFromLibraryButtonTitle: 'Escolhe da galeria'
-        }, response => {
+        }, (response: any) => {
             if(response.didCancel){
                 return;
             }
@@ -117,14 +117,20 @@ const SignUp: React.FC = () =>{
                 return;
             }
 
-            const source = { uri: response.uri };
+            const data = new FormData();
 
-            this.setState({
-                avatarSource: source
+            data.append('avatar', {
+                type: 'image/jpeg',
+                name: `${user.id}.jpg`,
+                uri: response.uri
+            });
+
+            api.patch('users/avatar', data).then(apiResponse => {
+                updateUser(apiResponse.data);
             })
 
         });
-    },[]);
+    },[updateUser, user.id]);
 
     const handleGoBack = useCallback(()=>{
         navigation.goBack();
